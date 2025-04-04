@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>nome</th>
+            <th>rgm</th>
+            <th>curso</th>
+        </tr>
+        <tbody id="maquina"></tbody>
+    </table>
+    <script>
+         fetch('http://localhost:3078/meuendpoint') // chama a API
+        .then(res => res.json()) // transforma a resposta em JSON
+        .then(dados => {
+            // onde vou inserir
+            let corpoDaTabela = document.getElementById('maquina');
+            //o que vou inserir
+            let linhas = '';
+
+            // iterando sobre o array de dados
+            dados.forEach(x => {
+                linhas += `
+                    <tr>
+                        <td>${x.nome}</td>
+                        <td>${x.rgm}</td>
+                        <td>${x.curso}</td>
+                    </tr>
+                `;
+            });
+
+            corpoDaTabela.innerHTML = linhas; // inserindo todas as linhas na tabela
+        })
+    </script>
+</body>
+
+</html>
